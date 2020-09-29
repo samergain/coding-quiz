@@ -8,6 +8,7 @@ var answerSet = [
 ];
 //create a container div for the questions with their answers
 var mainDiv = document.getElementById("mainDiv");
+var quizDiv = document.getElementById("quizContainer");
 var h3q1 = document.getElementById("question");
 var answersDiv = document.getElementById("answers");
 var btn1El = document.getElementById("btn1");
@@ -16,13 +17,13 @@ var btn3El = document.getElementById("btn3");
 var btn4El = document.getElementById("btn4");
 var btns = [btn1El, btn2El, btn3El, btn4El];
 var pEl = document.getElementById("subResult");
+var finalResultEl = document.getElementById("finalResult");
 var timeLeft = document.getElementById("timeLeft");        
 //i is for questions array index. i++ after each click event and call printQAs again
 var i = 0;
-var timer = 90;
-var correctAnswer = 100;
+var correctAnswer = -1;  //placeholder for answerSet.correct value
 printQAs();
-// startQuiz(); 
+
 
 //print question with answers to screen
 function printQAs() {
@@ -39,42 +40,50 @@ function printQAs() {
         }    
 }
     
-// timer start & eventListener
-// function startQuiz(){
-//     var mainTimer = setInterval(function(){
-//         timeLeft.textContent = timer;
-//         timer--;
-        
-        answersDiv.addEventListener("click", function(event) {
-            // event.preventDefault();
-            if(event.target.matches("button")) {
-                // if (bingo is true) -> correct, else -> wrong
-                    var pressedBtn = event.target
-                    var isBingo = pressedBtn.getAttribute("bingo");
-                    
-                    if (isBingo == "true") {
-                        pEl.textContent = "Correct!";
-                    } else {
-                        timer = timer - 10;
-                        pEl.textContent = "Wrong! you lost 10 seconds."; 
-                    } 
-                    setTimeout(()=>{ 
-                        pEl.textContent = ""; 
-                    },2000);
-                    i++;
-                    resetTags();
-                    printQAs();
-                    //reset bingo for all buttons 
-                        
-            }
-        });
+// timer start & eventListener        
+answersDiv.addEventListener("click", function(event) {
+    event.preventDefault();
+    if(event.target.matches("button")) {
+        // if (bingo is true) -> correct, else -> wrong
+            var pressedBtn = event.target
+            var isBingo = pressedBtn.getAttribute("bingo");
+            
+            if (isBingo == "true") {
+                pEl.textContent = "Correct!";
+            } else {
+                timer = timer - 10;
+                pEl.textContent = "Wrong! you lost 10 seconds."; 
+            } 
+            setTimeout(()=>{ 
+                pEl.textContent = ""; 
+            },2000);
+            i++;
+            if(i<5){
+            //reset bingo for all buttons
+            resetTags();
+            printQAs();
+        } else {
+            
+            return;
+        }
+                
+                
+    } 
+});
 
-        // if(timer == 0 || i>4){
-        //     clearInterval(mainTimer);
-        // } 
+var timer = 60;
+var mainTimer = setInterval(function(){
+    timeLeft.textContent = timer;
+    timer--;
+    if(timer == 0 || i>4){
+        timeLeft.textContent = "Done!";
+        quizDiv.innerHTML = "";
+        finalResultEl.textContent = "Final Result is: " + timer;
+        clearInterval(mainTimer);
+    } 
 
-//     },1000);
-// }       
+},1000);
+       
 
 function resetTags() {
     // set all bingos to false
