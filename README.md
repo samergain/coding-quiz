@@ -20,7 +20,9 @@ After answering all 5 questions, you get the option to save your score.
 * [deployed application](https://samergain.github.io/coding-quiz/)
 
 # Screenshot 
-![screenshot](passwordG.png)
+![screenshot](1-1.png)
+![screenshot](1-2.png)
+![screenshot](1-3.png)
 
 # Future Improvements:
 * Add a starting page with short description and a "start quiz" button
