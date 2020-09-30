@@ -19,21 +19,22 @@ var btns = [btn1El, btn2El, btn3El, btn4El];
 var pEl = document.getElementById("subResult");
 var finalResultEl = document.getElementById("finalResult");
 var timeLeft = document.getElementById("timeLeft");        
-//i is for questions array index. i++ after each click event and call printQAs again
-var i = 0;
+//currentQuestion is for questions array index. currentQuestion++ after each click event and call printQAs again
+var currentQuestion = 0;
 var correctAnswer = -1;  //placeholder for answerSet.correct value
+var storeResult;
 printQAs();
 
 
 //print question with answers to screen
 function printQAs() {
     
-        h3q1.textContent = questions[i];
-        correctAnswer = answerSet[i].correct;
+        h3q1.textContent = questions[currentQuestion];
+        correctAnswer = answerSet[currentQuestion].correct;
         
         //fill in the answers and set bingo to true for the correct answer
         for(var j=0; j<4; j++) {
-            btns[j].textContent = answerSet[i].answers[j];
+            btns[j].textContent = answerSet[currentQuestion].answers[j];
             if (j == correctAnswer) {
             btns[j].setAttribute("bingo","true");
             }
@@ -57,8 +58,8 @@ answersDiv.addEventListener("click", function(event) {
             setTimeout(()=>{ 
                 pEl.textContent = ""; 
             },2000);
-            i++;
-            if(i<5){
+            currentQuestion++;
+            if(currentQuestion<5){
             //reset bingo for all buttons
             resetTags();
             printQAs();
@@ -75,15 +76,26 @@ var timer = 60;
 var mainTimer = setInterval(function(){
     timeLeft.textContent = timer;
     timer--;
-    if(timer == 0 || i>4){
+    if(currentQuestion > 4){
+        storeResult = timer + 2; //+2 to compensate for the last setTimeout in Q5
         timeLeft.textContent = "Done!";
         quizDiv.innerHTML = "";
-        finalResultEl.textContent = "Final Result is: " + timer;
+        finalResultEl.textContent = "Final Result is: " + storeResult;
         clearInterval(mainTimer);
-    } 
+        
+    } else if (timer < 0) {
+        timeLeft.textContent = "Out of Time!";
+        quizDiv.innerHTML = "";
+        clearInterval(mainTimer);
+    }
 
 },1000);
-       
+
+
+
+
+
+
 
 function resetTags() {
     // set all bingos to false
