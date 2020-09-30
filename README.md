@@ -1,5 +1,5 @@
 # coding-quiz
-Quick quiz game implementing DOM, Events, Timers, LocalStorage. 
+Quick cozy cool quiz game implementing DOM, Events, Timers, LocalStorage. 
 
 # How Does It Work?
 The timer is set to 60 seconds to answer 5 questions related to localStorage. 
