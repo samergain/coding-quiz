@@ -71,16 +71,19 @@ answersDiv.addEventListener("click", function(event) {
                 
     } 
 });
-
+var saveScoreDiv = document.getElementById("saveScore");
+var initialsForm = document.getElementById("initialsForm");
 var timer = 60;
 var mainTimer = setInterval(function(){
     timeLeft.textContent = timer;
     timer--;
+    //check if quiz is over
     if(currentQuestion > 4){
         storeResult = timer + 2; //+2 to compensate for the last setTimeout in Q5
         timeLeft.textContent = "Done!";
         quizDiv.innerHTML = "";
         finalResultEl.textContent = "Final Result is: " + storeResult;
+        initialsForm.setAttribute("style","visibility: visible;");
         clearInterval(mainTimer);
         
     } else if (timer < 0) {
@@ -91,9 +94,27 @@ var mainTimer = setInterval(function(){
 
 },1000);
 
+////////////
+//storing scores in localStorage
+///////////
 
 
-
+var initialsText = document.getElementById("initialsText");
+var key = ""; //key for localStorage
+var value = ""; //value for localStorage
+initialsForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var dateTime = new Date();
+    var initialsInput = initialsText.value.trim();
+    // Return from function early if submitted is blank
+    if (initialsText === "") {
+      return;
+    }
+    key = initialsInput + "-" + dateTime;
+    value = storeResult;
+    localStorage.setItem(key,value); 
+    initialsText.value = "";
+  });
 
 
 

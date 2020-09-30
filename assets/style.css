@@ -9,10 +9,8 @@ html, body {
     text-align: center;
 }
 
-button {
-    align-items: center;
+#initialsForm {
+    visibility: hidden;
 }
 
-li {
-    list-style: none;
-}
+
