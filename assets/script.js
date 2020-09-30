@@ -1,10 +1,14 @@
-var questions = ["Q1","Q2","Q3","Q4","Q5"];
+var questions = ["localStorage is linked to:",
+                 "localStorage saves key and value as:",
+                 "Save to localStorage by using:",
+                 "To get the key of the 3rd item in localStorage use:",
+                 "To remove an item from localStorage use:"];
 var answerSet = [
-    {correct: 0, answers: ["a1-1","a1-2","a1-3","a1-4"]},
-    {correct: 1, answers: ["a2-1","a2-2","a2-3","a2-4"]},
-    {correct: 0, answers: ["a3-1","a3-2","a3-3","a3-4"]},
-    {correct: 3, answers: ["a4-1","a4-2","a4-3","a4-4"]}, 
-    {correct: 1, answers: ["a5-1","a5-2","a5-3","a5-4"]} 
+    {correct: 0, answers: ["The website domain","Browser","Web Page","RAM"]},
+    {correct: 1, answers: ["Integer","String","Boolean","Story"]},
+    {correct: 0, answers: ["localStorage.setItem","localStorage.getItem","localStorage.createItem","localStorage.appendItem"]},
+    {correct: 3, answers: ["localStorage.key.value[2]","localStorage.getItem(3)","localStorage.getKey(3)","localStorage.key(2)"]}, 
+    {correct: 1, answers: ["localStorage.pop","localStorage.removeItem","localStorage.delete","localStorage.clear"]} 
 ];
 //create a container div for the questions with their answers
 var mainDiv = document.getElementById("mainDiv");
