@@ -114,8 +114,23 @@ initialsForm.addEventListener("submit", function(event) {
     value = storeResult;
     localStorage.setItem(key,value); 
     initialsText.value = "";
+    //set display printScores to block
+    printScores();
   });
+//print scores on screen by looping on localStorage
+var ulScores = document.getElementById("scoresLocalStorage");
+function printScores() {
+    ulScores.textContent = "Scores:";
+    for (var i=0; i<localStorage.length; i++) {
+        var keyStorage = localStorage.key(i);
+        var valueStorage = localStorage.getItem(keyStorage);
+        //assign localStorage to li element
+        var li = document.createElement("li");
+        li.textContent = keyStorage + " - Score: " + valueStorage;
+        ulScores.append(li);
+}
 
+}
 
 
 function resetTags() {

@@ -2,13 +2,16 @@ html, body {
     background: linear-gradient(to right, #9cc1c4, #d4b777);
 }
 #mainDiv {
-    width: 600px;
+    width: 90%;
     background-color: antiquewhite;
-    height: 500px;
+    height: 90%;
     border-radius: 0.5rem;
     text-align: center;
 }
 
+li, ul {
+    text-align: left;
+}
 #initialsForm {
     visibility: hidden;
 }
